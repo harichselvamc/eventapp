@@ -2,18 +2,26 @@ import streamlit as st
 import time
 import pyrebase
 
-firebase_config = {
-     "apiKey": "AIzaSyBPX2pBwuZoSAA8FPe3Awaojtie9Aoq8Bk",
-  "authDomain": "myapiharichselvam.firebaseapp.com",
-  "databaseURL": "https://myapiharichselvam-default-rtdb.asia-southeast1.firebasedatabase.app",
-  "projectId": "myapiharichselvam",
-  "storageBucket": "myapiharichselvam.appspot.com",
-  "messagingSenderId": "163847734277",
-  "appId": "1:163847734277:web:338248a3b67dd32d61086c",
-  "measurementId": "G-2R0GYN9BNN"
-}
 
+import streamlit as st
+import json
 
+# Load the Firebase configuration JSON string from the secrets
+firebase_config_json = st.secrets["server"]["firebase_config"]
+
+# Parse the JSON string into a dictionary
+firebase_config = json.loads(firebase_config_json)
+
+# Now you can access individual values from the config dictionary
+# Extract values from the config dictionary
+api_key = firebase_config["apiKey"]
+auth_domain = firebase_config["authDomain"]
+database_url = firebase_config["databaseURL"]
+project_id = firebase_config["projectId"]
+storage_bucket = firebase_config["storageBucket"]
+messaging_sender_id = firebase_config["messagingSenderId"]
+app_id = firebase_config["appId"]
+measurement_id = firebase_config["measurementId"]
 firebase = pyrebase.initialize_app(firebase_config)
 db = firebase.database()
 
